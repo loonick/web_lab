@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-interface {
+    display: flex;
+    width: 800px;
+    /*grid-template-columns: 200px 600px;
+    grid-template-rows: 80px 600px;
+    grid-template-areas:
+            "header header "
+            "left-menu main-game";*/
+}
+
+.header {
+    /*grid-area: header;*/
+    display: flex;
+    background-color: rgb(116, 223, 133);
+    text-align: center;
+    flex-direction: row;
+    border-width: 0 0 4px 0;
+    width: 100%;
+    
+
+}
+
+.left-menu {
+    /*grid-area: left-menu;*/
+    float: left;
+    text-align: center;
+    background-color:rgb(116, 223, 133);
+    font-size: 1.3rem;
+
+}
+
+.body_game{
+    display: grid;
+    margin-right: auto;
+    margin-top: -20px;
+    grid-template-columns: 200px 600px "main-game";
+    
+}
+
+.time {
+   margin-left: 3rem;
+}
+
+.level {
+  margin-left: 5rem;
+}
+
+.name {
+    margin-right: auto;
+    margin-left: 10rem;
+    font-size: 1.5rem;
+}
+
+.gamefield {
+    grid-area: main-game;
+    display: grid;
+    margin-top: -250px;
+    margin-left: 12rem;
+    padding: 2px;
+    width: 500px;
+    height: 500px;
+}
+
+.start {
+    width: 100px;
+    height: 100px;
+    margin-top: 200px;
+    margin-left: 10rem;
+    margin-right: auto;
+    border-radius: 1rem;
+    float: left;
+}
+
+.square {
+    size: auto;
+    margin: 1px;
+}
