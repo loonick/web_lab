@@ -11,7 +11,6 @@ function timeGame() {
         loose();
     }
     time--;
-    localStorage.setItem('gameTime', 'time');
 }
 
 function rand(min, max){
