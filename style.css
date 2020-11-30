@@ -8,15 +8,11 @@ body {
 .main-interface {
     display: flex;
     width: 800px;
-    /*grid-template-columns: 200px 600px;
-    grid-template-rows: 80px 600px;
-    grid-template-areas:
-            "header header "
-            "left-menu main-game";*/
+    
 }
 
 .header {
-    /*grid-area: header;*/
+    
     display: flex;
     background-color: rgb(116, 223, 133);
     text-align: center;
@@ -28,7 +24,7 @@ body {
 }
 
 .left-menu {
-    /*grid-area: left-menu;*/
+
     float: left;
     text-align: center;
     background-color:rgb(116, 223, 133);

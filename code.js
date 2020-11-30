@@ -14,14 +14,14 @@ function timeGame() {
 }
 
 function rand(min, max){
-    return Math.floor(Math.random() * (max - min)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function split() {
     const
-        hue = rand(0, 360),
-        saturation = 100,
-        lightness = 50,
+        hu = rand(1, 360),
+        satur = 100,
+        light = 50,
         squareCount = (level+1) * (level+1),
         gameField = document.getElementById("gameField");
 
@@ -32,8 +32,8 @@ function split() {
     gameField.style.gridTemplateColumns = `repeat(${(level+1).toString()}, 1fr)`;
 
     const
-        mainColor = "hsl(" + hue.toString() + ", " + saturation.toString() + "%, " + lightness.toString() + "%)",
-        semiColor = "hsl(" + hue.toString() + ", " + (saturation - saturation/level).toString() + "%, " + (lightness - lightness/level).toString() + "%)",
+        mainColor = "hsl(" + hu.toString() + ", " + satur.toString() + "%, " + light.toString() + "%)",
+        semiColor = "hsl(" + hu.toString() + ", " + (satur - satur/level).toString() + "%, " + (light - light/level).toString() + "%)",
         randomSquare = rand(0, squareCount);
 
     for (let i = 0; i < squareCount; i++) {
@@ -49,33 +49,25 @@ function split() {
             square.id = "mainSquare" + i.toString();
         }
 
-        square.onclick = squareClick;
+        square.onclick = function() { if (this.id === "semiSquare") {
+            level++;
+            document.getElementById("level").innerHTML = level;
+            split();
+        }
+        else {
+                clearInterval(timer);
+        let gameField = document.getElementById("gameField");
+
+        while (gameField.firstChild) {
+            gameField.removeChild(gameField.firstChild);
+        }
+
+        alert(`Вы дошли до ${level.toString()} уровня.`);
+        level = 0;
+        time = 0;
+            };
+    }
         gameField.appendChild(square);
-    }
-}
-
-function loose() {
-    clearInterval(timer);
-    let gameField = document.getElementById("gameField");
-
-    while (gameField.firstChild) {
-        gameField.removeChild(gameField.firstChild);
-    }
-
-    alert(`Вы дошли до ${level.toString()} уровня.`);
-    level = 0;
-    time = 0;
-
-}
-
-function squareClick() {
-    if (this.id === "semiSquare") {
-        level++;
-        document.getElementById("level").innerHTML = level;
-        split();
-    }
-    else {
-        loose();
     }
 }
 
