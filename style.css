@@ -1,10 +1,3 @@
-body {
-    margin: 0;
-    background-color: whitesmoke;
-    display: flex;
-    flex-direction: column;
-}
-
 .main-interface {
     display: flex;
     width: 800px;
@@ -23,58 +16,56 @@ body {
 
 }
 
-.left-menu {
-
-    float: left;
-    text-align: center;
-    background-color:rgb(116, 223, 133);
-    font-size: 1.3rem;
-
-}
-
-.body_game{
-    display: grid;
-    margin-right: auto;
-    margin-top: -20px;
-    grid-template-columns: 200px 600px "main-game";
-    
-}
-
 .time {
-   margin-left: 3rem;
+   margin-left: 2.5%;
 }
 
 .level {
-  margin-left: 5rem;
+  margin-left: 5%;
 }
 
 .name {
     margin-right: auto;
-    margin-left: 10rem;
+    margin-left: 15%;
     font-size: 1.5rem;
 }
 
-.gamefield {
-    grid-area: main-game;
-    display: grid;
-    margin-top: -250px;
-    margin-left: 12rem;
-    padding: 2px;
-    width: 500px;
+body {
+    margin: 0;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+}
+
+.body_game {
+    width: 80%;
+    height: 70%;
+    margin: auto;
+    display: flex;
+    margin-top: 1%;
+}
+
+
+.field {
     height: 500px;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    padding: 1px;
+    margin-left: 15%;
+}
+
+.square {
+    
 }
 
 .start {
     width: 100px;
     height: 100px;
-    margin-top: 200px;
-    margin-left: 10rem;
+    margin-top: 50%;
+    margin-left: 10%;
     margin-right: auto;
     border-radius: 1rem;
     float: left;
-}
-
-.square {
-    size: auto;
-    margin: 1px;
 }

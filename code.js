@@ -1,81 +1,82 @@
-let
-    time,
-    level,
-    timer;
+let n;
 
+let timerId;
+let time;
+let levelc;
+const timer = document.getElementById("time_game");
+const level = document.getElementById("level");
 
-
-function timeGame() {
-    document.getElementById("time_game").innerHTML = time;
-    if (time === 0) {
-        loose();
-    }
-    time--;
-}
-
-function rand(min, max){
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function split() {
-    const
-        hu = rand(1, 360),
-        satur = 100,
-        light = 50,
-        squareCount = (level+1) * (level+1),
-        gameField = document.getElementById("gameField");
-
-    while (gameField.firstChild) {
-        gameField.removeChild(gameField.firstChild);
-    }
-
-    gameField.style.gridTemplateColumns = `repeat(${(level+1).toString()}, 1fr)`;
-
-    const
-        mainColor = "hsl(" + hu.toString() + ", " + satur.toString() + "%, " + light.toString() + "%)",
-        semiColor = "hsl(" + hu.toString() + ", " + (satur - satur/level).toString() + "%, " + (light - light/level).toString() + "%)",
-        randomSquare = rand(0, squareCount);
-
-    for (let i = 0; i < squareCount; i++) {
-
-        let square = document.createElement('div');
-        square.className = 'square';
-        
-        if (i === randomSquare) {
-            square.style.backgroundColor = semiColor;
-            square.id = "semiSquare";
-        } else {
-            square.style.backgroundColor = mainColor;
-            square.id = "mainSquare" + i.toString();
-        }
-
-        square.onclick = function() { if (this.id === "semiSquare") {
-            level++;
-            document.getElementById("level").innerHTML = level;
-            split();
-        }
-        else {
-                clearInterval(timer);
-        let gameField = document.getElementById("gameField");
-
-        while (gameField.firstChild) {
-            gameField.removeChild(gameField.firstChild);
-        }
-
-        alert(`Вы дошли до ${level.toString()} уровня.`);
-        level = 0;
-        time = 0;
-            };
-    }
-        gameField.appendChild(square);
-    }
+function createField(){
+    let field = document.getElementById("field");
 }
 
 function startGame() {
-    time = 100;
-    level = 1;
-    document.getElementById("level").innerHTML = level;
+    
+    levelc = 1;
+    clearInterval(timerId);
+    time = 100 * 1000;
+    timerId = setInterval(timeGame, 100);
+    n = 2;
+    createField();
     split();
-    timer = setInterval(timeGame, 1000);
 }
 
+function timeGame() {
+    timer.innerHTML = Math.round(time / 1000);
+    if (time <= 0) {
+        getFailed();
+    }
+    time -= 100;
+}
+
+function split() {
+    
+    level.innerHTML = levelc;
+    field.innerHTML = "";
+    
+    const n2 = n*n;
+    const size = 492 / n;
+    const margin = Math.max(Math.floor(size / 30), 1);
+    const realSize = size - margin;
+
+    const hu = rand(0, 360);
+    const satur = 100;
+    const light = 50;
+
+
+    const mainColor = "hsl(" + hu.toString() + ", " + satur.toString() + "%, " + light.toString() + "%)";
+    const semiColor = "hsl(" + hu.toString() + ", " + (satur - satur/levelc).toString() + "%, " + (light - light/levelc).toString() + "%)";
+
+    for (let i = 0; i < n2; i++) {
+        const elem = document.createElement("div");
+        elem.className = "square";
+        elem.id = i;
+        elem.style.width = realSize + "px";
+        elem.style.height = realSize + "px";
+        elem.style.margin = margin + "px " + "0 0 " + margin + "px";
+        elem.style.backgroundColor = mainColor;
+        
+        field.appendChild(elem);
+        elem.onclick = () => loose();
+    }
+    
+    const el = document.getElementById(rand(0, n2 - 1));
+    el.style.backgroundColor = semiColor;
+    el.onclick = () => split();
+    n++;
+    levelc++;
+}
+
+function loose () {
+    clearInterval(timerId);
+    
+    alert(`Вы дошли до ${(levelc-1).toString()} уровня.`);
+    level.innerHTML = 0;
+    timer.innerHTML = 0;
+    startGame();
+}
+
+
+function rand(min, max){
+    return Math.floor(Math.random() * (max - min)) + min;
+}
